@@ -1,0 +1,29 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 1rem;
+    overflow: scroll;
+    background-color: #f0f0f0;
+}
+
+#text-container {
+    font-size: 15px;
+    /* margin: 2rem; */
+    width: 80%;
+}
+
+
+/* below not used in this project */
+.cursor {
+    display: inline-block;
+    vertical-align: middle;
+    width: 4px;
+    height: 20px;
+    background-color: #333;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}

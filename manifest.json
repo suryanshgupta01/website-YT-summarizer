@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube Transcript Summarizer",
+  "version": "1.0",
+  "description": "Extracts the transcript from a YouTube video and generates a summary.",
+  "icons": {
+    "128": "yt logo.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "https://www.googleapis.com/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "yt logo.png"
+  }
+}
