@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // textContainer.innerHTML = text;
 });
 // const baseURL = "http://127.0.0.1:5000"
-const baseURL = "https://summarizer-ybq0.onrender.com"
+const baseURL = "https://summarizer-q2lh.onrender.com"
 execute_gemini = (website) => {
     var url = baseURL + "/fetch_gemini"
     var formData = new FormData();
