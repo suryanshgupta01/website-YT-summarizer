@@ -30,13 +30,13 @@ def fetch_gemini():
                 transcript += x[i]["text"]+" "
         except:
             return jsonify({'gemini_response':'No transcript found for the video. Please try again with other video.'})
-        
-        if not loading :
-            loading=True
-            response = model.generate_content("Tell the key points in this video from the transcript given below"+transcript)
-            loading=False
         else:
-            return jsonify({'gemini_response':'Please try again after a while. Gemini was loading.'})
+            if not loading :
+                loading=True
+                response = model.generate_content("Tell the key points in this video from the transcript given below"+transcript)
+                loading=False
+            else:
+                return jsonify({'gemini_response':'Please try again after a while. Gemini was loading.'})
         
     else:
         response = model.generate_content("Summarize the content of the given website in key points "+url)
@@ -45,8 +45,8 @@ def fetch_gemini():
 
 
 # for development only
-# if __name__ == "__main__":
-#     print("Starting Python Flask Server For Summarizing Website and YT videos")
-#     app.run(debug=True)
+if __name__ == "__main__":
+    print("Starting Python Flask Server For Summarizing Website and YT videos")
+    app.run(debug=True)
 
 # for production comment above
