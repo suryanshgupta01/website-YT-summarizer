@@ -7,4 +7,4 @@ google-ai-generativelanguage
 google-auth
 google-generativeai
 json5
-youtube_transcript_api=0.6.1
+youtube_transcript_api=0.5.0
