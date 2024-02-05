@@ -28,17 +28,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // updateText();
     // textContainer.innerHTML = text;
 });
-const baseURL ="http://127.0.0.1:5000"
+const baseURL = "http://127.0.0.1:5000"
 execute_gemini = (website) => {
     var url = baseURL + "/fetch_gemini"
     var formData = new FormData();
     formData.append('url', website);
     textContainer.innerHTML = "LOADING...";
 
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
         .then(function (response) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -53,12 +53,15 @@ execute_gemini = (website) => {
         });
 
 };
-
-console.log("hello")
+const refreshbutton = document.getElementById('refresh')
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     var tab = tabs[0];
     var url = tab.url;
     const ele = document.getElementById('newid');
     // ele.innerHTML = url;
+
     execute_gemini(url)
+    refreshbutton.addEventListener('click', function () {
+        execute_gemini(url)
+    });
 });

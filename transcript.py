@@ -15,17 +15,29 @@ CORS(app)
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-pro')
 
+loading=False
 @app.route('/fetch_gemini', methods=['POST'])
 def fetch_gemini():
+    global loading
     url = request.form['url']
     isYoutube = url.startswith("https://www.youtube.com/watch?v=")
     link=url[32:43]
     if(isYoutube):
         transcript=""
-        x = YouTubeTranscriptApi.get_transcript(link,languages=['en','hi'])
-        for i in range(len(x)):
-            transcript += x[i]["text"]+" "
-        response = model.generate_content("Tell the key points in this video from the transcript given below"+transcript)
+        try:
+            x = YouTubeTranscriptApi.get_transcript(link,languages=['en','hi'])
+            for i in range(len(x)):
+                transcript += x[i]["text"]+" "
+            if not loading:
+                loading=True
+                response = model.generate_content("Tell the key points in this video from the transcript given below"+transcript)
+                loading=False
+            else:
+                return jsonify({'gemini_response':'Please try again after a while. Gemini was loading.'})
+            # response = model.generate_content("Tell the key points in this video from the transcript given below"+transcript)
+        except:
+            return jsonify({'gemini_response':'no transcript found for the video. Please try another video.'})
+        
     else:
         response = model.generate_content("Summarize the content of the given website in key points "+url)
     answer = response.text
