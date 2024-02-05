@@ -28,8 +28,8 @@ def fetch_gemini():
             x = YouTubeTranscriptApi.get_transcript(link,languages=['en','hi'])
             for i in range(len(x)):
                 transcript += x[i]["text"]+" "
-        except:
-            return jsonify({'gemini_response':'No transcript found for the video. Please try again with other video.'})
+        except Exception as e:
+            return jsonify({'gemini_response':f'No transcript found for the video. Please try again with other video. {e}'})
         else:
             if not loading :
                 loading=True
@@ -45,8 +45,8 @@ def fetch_gemini():
 
 
 # for development only
-if __name__ == "__main__":
-    print("Starting Python Flask Server For Summarizing Website and YT videos")
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     print("Starting Python Flask Server For Summarizing Website and YT videos")
+#     app.run(debug=True)
 
 # for production comment above
